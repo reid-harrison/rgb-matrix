@@ -1,6 +1,7 @@
+static const byte RED = color(7, 0, 0);
+
 //Procedure for an image (frame )in mixed colors (PWM)
-void Display_one_Frame_PWM (byte frame[48], unsigned long end_time)
-{  
+void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {  
   byte SR[] = {0,0,0}; // Buffer for the 5 shift registers
 
   byte back =  0; // Return values ​​of the SPI
@@ -11,30 +12,31 @@ void Display_one_Frame_PWM (byte frame[48], unsigned long end_time)
   const byte LUT_bl[] = {
     B00001110, B00001000, B00001100, B00001000, B00001110, B00001000, B00001100, B00001000, B00001110, B00001000, B00001100, B00001000, B00001110, B00001000, B00001100, B00001000, B00001110, B00001000, B00001100, B00001000    };
 
-  do
-  {      
+  do {      
     //Frame display       
-    for (byte j=0; j<20; j++)
-    {             
-      for (byte column=0; column < 6; column++) // For all 8 rows
-      {           
+    for (byte j = 0; j < 20; j++) {             
+      for (byte column = 0; column < 6; column++) {          
         //The RGB line 3 x 12 = 36 bits is divided into the 5 8-bit shift registers buffer (5x8 = 40 bits). The remaining 4 bits in the 5th SR buffers are filled with zeros.
-        index = 8*column;
-        for (byte k=0; k<8 ; k++) {bitWrite(SR[0] , k   , bitRead(LUT_rg[j], (byte)((frame[index+k] >> 5))));} //SR1 contains 8 x red  
-        for (byte k=0; k<8 ; k++) {bitWrite(SR[1] , k   , bitRead(LUT_rg[j], (byte)(((byte)(frame[index+k] << 3)) >> 5) ));} //SR4 contains 8x green
-        for (byte k=0; k<8 ; k++) {bitWrite(SR[2] , k   , bitRead(LUT_bl[j], (byte)(((byte)(frame[index+k] << 6)) >> 6) ));} //SR3 contains 8x blue       
-       
-
-        byte row = B0000000;
-        bitSet(row, column); // create byte for SR6 (current row)
+        for (byte row = 0; row < 8; row++) {
+          bitWrite(SR[0], row, bitRead(LUT_rg[j], (byte)((frame[row][column] >> 5))));
+          
+          bitWrite(SR[1], row, bitRead(LUT_rg[j], (byte)(((byte)(frame[row][column] << 3)) >> 5) ));
+          
+          bitWrite(SR[2], row, bitRead(LUT_bl[j], (byte)(((byte)(frame[row][column] << 6)) >> 6) ));
+        } //SR0 contains 8 x red  
+      
+        byte ground = B0000000;
+        bitSet(ground, column); // create byte for SR6 (current row)
 
           //describe shift registers   
         EnableSPI();       
         digitalWrite(latchPin, LOW);                           // LatchPin to ground, so LEDs are not blinking when "pushing through"
-        back = SendRecSPI(row);                                // Byte for SR6 slide out
-        for (byte l=3; l>0; l--){
+        back = SendRecSPI(ground);                                // Byte for SR6 slide out
+        
+        for (byte l = 3; l > 0; l--) {
           back = SendRecSPI(SR[l-1]);
         }  // 5 bytes for SR5 slide out to SR1
+        
         digitalWrite(latchPin, HIGH);                          // LatchPin to HIGH, thus activating all SR
         DisableSPI();
 
@@ -75,9 +77,7 @@ byte SendRecSPI(byte Dbyte)
 }
 
 //Procedure calculates the color
-byte color(byte r, byte g, byte b){
-  return 32*r+4*g+b;
+byte color(byte r, byte g, byte b) {
+  return (32 * r) + (4 * g) + b;
 }
-
-
 

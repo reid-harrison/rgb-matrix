@@ -54,7 +54,7 @@ void Billiard_PWM (unsigned long duration, int pause)
     
     //Draw frame
     end_time = millis() + ((unsigned long) pause);
-    Display_one_Frame_PWM(Frame, end_time);
+    //Display_one_Frame_PWM(Frame, end_time);
     
   } while (millis() <= duration);
 }

@@ -6,11 +6,6 @@
 
 
 
-
-
-
-
-
 //Forward definitions for ADC rate setting
 #define FASTADC 1
 #ifndef cbi

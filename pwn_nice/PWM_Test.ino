@@ -1,5 +1,4 @@
-//Creates a rainbow out of mixed colors PWM
-void Rainbow_PWM (unsigned long duration, int pause)
+void PWM_Test (unsigned long duration, int pause)
 {
   byte LUT[40];
   byte Frame[6][8];
