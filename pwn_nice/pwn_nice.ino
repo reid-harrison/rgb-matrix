@@ -84,8 +84,8 @@ void setup()
 
 void loop()
 {
-    //Rainbow_PWM(random(5,30),random( 40, 10));
-    Random_PWM(50,100); 
+    Rainbow_PWM(random(5,30),random( 40, 10));
+    //Random_PWM(50,100); 
     //Moving_Rainbow(10,50);
     //Test_Run();
 }
