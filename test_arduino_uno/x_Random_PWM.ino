@@ -2,12 +2,18 @@
 void Random_PWM (unsigned long duration, int pause)
 {
 
-  byte Frame[48];
+  int Frame[6][8][3];
   unsigned long end_time  = 0;
   
   duration = millis() + (duration * 1000);
   
-  for (byte i=0; i<48; i++){Frame[i] = 255;}
+  for (int row = 0; row < 6; row++) {
+    for (int col = 0; col < 8; col++) {
+      for (int color = 0; color < 3; color++) {
+        Frame[row][col][color] = random(156) + 100;
+      }
+    }
+  }
     
   do
   {

@@ -2,7 +2,7 @@
 void Rainbow_PWM (unsigned long duration, int pause)
 {
   byte LUT[40];
-  byte Frame[96];
+  int Frame[6][8][3];
   byte counter = 0;
   unsigned long end_time  = 0;
   
@@ -28,7 +28,7 @@ void Rainbow_PWM (unsigned long duration, int pause)
     {
       for (byte j=0; j<8; j++)
       {
-        if ((counter+i) < 40) {Frame[j*12+i] =  LUT[counter+i];} else {Frame[j*12+i] =  LUT[counter+i-40];}
+        //if ((counter+i) < 40) {Frame[j*12+i] =  LUT[counter+i];} else {Frame[j*12+i] =  LUT[counter+i-40];}
       } 
     }
         
