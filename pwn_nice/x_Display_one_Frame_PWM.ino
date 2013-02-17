@@ -39,7 +39,7 @@ void Display_one_Frame_PWM (byte frame[48], unsigned long end_time)
         DisableSPI();
 
         //Warten
-        delayMicroseconds(1); // just wait         
+       // delayMicroseconds(1); // just wait         
       }   
     }
   } 

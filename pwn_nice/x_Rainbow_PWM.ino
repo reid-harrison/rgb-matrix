@@ -6,8 +6,8 @@ void Rainbow_PWM (unsigned long duration, int pause)
   byte counter = 0;
   unsigned long end_time  = 0;
   
-  duration = millis() + (duration * 1000);
-     
+  duration = millis() + (duration * 10000);
+  
   //Create LUT 
   for (byte k=0; k<8; k++) 
   {
@@ -18,17 +18,24 @@ void Rainbow_PWM (unsigned long duration, int pause)
               LUT[28 + k] = color(k  ,0  ,3  );  // R: 0-->7 ;  G: 0     ; B: 3
     if (k<4) {LUT[36 + k] = color(7  ,0  ,3-k);} // R: 7     ;  G: 0     ; B: 3-->0
   } 
+  
+ // LUT[0] = 0;
+  //LUT[1] = 0;
     
-  do
-  {
-    if (counter == 40) {counter = 0;}
+  do {
+    
+    if (counter == 40) {
+      counter = 0;
+    }
   
     //Frame erstellen
-    for (byte i=0; i<8; i++)
-    {
-      for (byte j=0; j<6; j++)
-      {
-        if ((counter+i) < 40) {Frame[j*8+i] =  LUT[counter+i];} else {Frame[j*8+i] =  LUT[counter+i-40];}
+    for (byte col = 0; col < 8; col++){
+      for (byte row = 0; row < 6; row++)  {
+        if (counter + col < 40) {
+          Frame[row * 8 + col] = LUT[counter + col];
+        } else {
+          Frame[row * 8 + col] = LUT[counter + col - 40];
+        }
       } 
     }
         

@@ -7,7 +7,7 @@ void Laola (byte counter[6], byte Direction[6], unsigned long duration, int paus
       
   do{          
       //Delete old picture
-      for (byte column=0; column < 12; column++)
+      for (byte column=0; column < 8; column++)
       {
         buffer_r[column] = 0;
         buffer_g[column] = 0;
@@ -50,19 +50,6 @@ void Laola (byte counter[6], byte Direction[6], unsigned long duration, int paus
       bitSet(buffer_g[6],counter[3]+1);
       bitSet(buffer_g[7],counter[3]+1);    
 
-      bitSet(buffer_r[8],counter[4]  );
-      bitSet(buffer_r[9],counter[4]  );
-      bitSet(buffer_r[8],counter[4]+1);
-      bitSet(buffer_r[9],counter[4]+1);
-
-      bitSet(buffer_r[10],counter[5]  );
-      bitSet(buffer_r[11],counter[5]  );
-      bitSet(buffer_r[10],counter[5]+1);
-      bitSet(buffer_r[11],counter[5]+1);
-      bitSet(buffer_b[10],counter[5]  );
-      bitSet(buffer_b[11],counter[5]  );
-      bitSet(buffer_b[10],counter[5]+1);
-      bitSet(buffer_b[11],counter[5]+1);
       
       end_time = millis() + ((unsigned long) pause);           
     

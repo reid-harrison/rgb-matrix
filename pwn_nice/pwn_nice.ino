@@ -5,10 +5,6 @@
 #define PIN_MOSI    11 // SPI data output
 
 
-////Pin connected to clock pin (SH_CP) of 74HC595
-//const int clockPin = 4;
-//////Pin connected to Data in (DS) of 74HC595
-//const int dataPin = 2;
 
 
 
@@ -25,9 +21,18 @@
 #endif
 
 
+
+
 //Start frames for "Laola" procedure(s)
 byte  counter_1[6] = {0,1,2,3,4,5};
 byte direction_1[6] = {1,1,1,1,1,1};
+byte  counter_2[6] = {0,2,4,4,2,0};
+byte direction_2[6] = {1,1,1,1,1,1};
+byte  counter_3[6] = {0,6,0,6,0,6};
+byte direction_3[6] = {1,0,1,0,1,0};
+byte  counter_4[6];
+byte direction_4[6];
+
 
 
 //Buffer for the LEDs
@@ -84,8 +89,13 @@ void setup()
 
 void loop()
 {
-    Rainbow_PWM(random(5,30),random( 40, 10));
+    //Rainbow_PWM(300, 200);
     //Random_PWM(50,100); 
     //Moving_Rainbow(10,50);
     //Test_Run();
+    Plasma_PWM(5000, 50);
+    //Billiard_PWM (500, 50);
+    //Moving_RGB_Lines(50, 100);
+    //Jumping_RGB_Balls(50, 500);
+    //Laola(counter_1, direction_1, 5,90);
 }

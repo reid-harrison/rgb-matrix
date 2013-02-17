@@ -7,12 +7,12 @@ void Random_PWM (unsigned long duration, int pause)
   
   duration = millis() + (duration * 1000);
   
-  for (byte i=0; i<48; i++){Frame[i] = 50;}
+  for (byte i=0; i<48; i++){Frame[i] = random(50,255);}
     
   do
   {
     //Create Frame
-    //for (byte i=0; i<48; i++) {if (Frame[i] < 255) {Frame[i]++;} else {Frame[i] = 0;}}
+    for (byte i=0; i<48; i++) {if (Frame[i] < 255) {Frame[i]++;} else {Frame[i] = 0;}}
     
     //Draw frame
     end_time = millis() + ((unsigned long) pause);
