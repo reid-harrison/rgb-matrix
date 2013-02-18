@@ -93,11 +93,11 @@ void loop()
       break;
     
     case 0:
-      Plasma_PWM(5000, 50);
+      Plasma_PWM(5000, 500);
       break;
       
     case 1:
-      Rainbow_PWM(3000, 5);
+      Rainbow_PWM(3000, 1000);
       break;
       
     case 2:
