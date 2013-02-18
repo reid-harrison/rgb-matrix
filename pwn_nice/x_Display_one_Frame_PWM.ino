@@ -1,4 +1,12 @@
-static const byte RED = color(7, 0, 0);
+#define RED  color(7, 0, 0)
+#define BLUE  color(0, 0, 7)
+#define GREEN  color(0, 7, 0)
+
+#define PURPLE  color(7, 0, 7)
+#define CYAN  color(0, 7, 7)
+#define YELLOW  color(7, 7, 0)
+
+const byte COLORS[] = { RED, BLUE, GREEN, PURPLE, CYAN, YELLOW };
 
 //Procedure for an image (frame )in mixed colors (PWM)
 void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {  
@@ -15,18 +23,18 @@ void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {
   do {      
     //Frame display       
     for (byte j = 0; j < 20; j++) {             
-      for (byte column = 0; column < 6; column++) {          
+      for (byte row = 0; row < 6; row++) {          
         //The RGB line 3 x 12 = 36 bits is divided into the 5 8-bit shift registers buffer (5x8 = 40 bits). The remaining 4 bits in the 5th SR buffers are filled with zeros.
-        for (byte row = 0; row < 8; row++) {
-          bitWrite(SR[0], row, bitRead(LUT_rg[j], (byte)((frame[row][column] >> 5))));
+        for (byte col = 0; col < 8; col++) {
+          bitWrite(SR[0], col, bitRead(LUT_rg[j], (byte)((frame[row][col] >> 5))));
           
-          bitWrite(SR[1], row, bitRead(LUT_rg[j], (byte)(((byte)(frame[row][column] << 3)) >> 5) ));
+          bitWrite(SR[1], col, bitRead(LUT_rg[j], (byte)(((byte)(frame[row][col] << 3)) >> 5) ));
           
-          bitWrite(SR[2], row, bitRead(LUT_bl[j], (byte)(((byte)(frame[row][column] << 6)) >> 6) ));
+          bitWrite(SR[2], col, bitRead(LUT_bl[j], (byte)(((byte)(frame[row][col] << 6)) >> 6) ));
         } //SR0 contains 8 x red  
       
         byte ground = B0000000;
-        bitSet(ground, column); // create byte for SR6 (current row)
+        bitSet(ground, row); // create byte for SR6 (current row)
 
           //describe shift registers   
         EnableSPI();       
@@ -77,7 +85,7 @@ byte SendRecSPI(byte Dbyte)
 }
 
 //Procedure calculates the color
-byte color(byte r, byte g, byte b) {
-  return (32 * r) + (4 * g) + b;
+byte color(byte r, byte g, byte b){
+  return 32*r+4*g+b;
 }
 

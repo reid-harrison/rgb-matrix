@@ -2,7 +2,7 @@
 void Plasma_PWM (unsigned long duration, int pause)
 {
 
-  byte  Frame[48];
+  byte  Frame[6][8];
   int  Plasma[48];
   
   unsigned long end_time  = 0; 
@@ -49,17 +49,17 @@ void Plasma_PWM (unsigned long duration, int pause)
     //Calculate frame
     paletteShift = (int) (millis() / 30);
 
-    for (byte x = 0; x < 8; x++)
+    for (byte col = 0; col < 8; col++)
     {
-      for (byte y = 0; y < 6; y++)
+      for (byte row = 0; row < 6; row++)
       {
-        Frame[y*8+x] = LUT[(Plasma[y*8+x] + paletteShift) % 40];
+        Frame[row][col] = LUT[(Plasma[row*8+col] + paletteShift) % 40];
       }
     }   
     
     //Draw new frame
     end_time = millis() + ((unsigned long) pause);
-    //Display_one_Frame_PWM(Frame, end_time);
+    Display_one_Frame_PWM(Frame, end_time);
     
   } while (millis() <= duration);
 }

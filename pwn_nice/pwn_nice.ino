@@ -82,13 +82,38 @@ void setup()
   
 }
 
+int choice = 0;
+
 void loop()
 {
+  switch (choice) {
+    
+    case -1:
+      PWM_Test(300, 1);
+      break;
+    
+    case 0:
+      Plasma_PWM(5000, 50);
+      break;
+      
+    case 1:
+      Rainbow_PWM(3000, 5);
+      break;
+      
+    case 2:
+      Random_PWM(50,100);
+      break;
+      
+    case 3:
+      Laola(counter_1, direction_1, 5,90);
+      break;
+  }
     //Rainbow_PWM(300, 200);
+    //PWM_Test(300, 1);
     //Random_PWM(50,100); 
     //Moving_Rainbow(10,50);
     //Test_Run();
-    Plasma_PWM(5000, 50);
+    //Plasma_PWM(5000, 50);
     //Billiard_PWM (500, 50);
     //Moving_RGB_Lines(50, 100);
     //Jumping_RGB_Balls(50, 500);

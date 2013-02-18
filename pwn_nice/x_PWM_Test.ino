@@ -5,6 +5,9 @@ void PWM_Test (unsigned long duration, int pause)
   byte counter = 0;
   unsigned long end_time  = 0;
   
+  
+  byte colorCount = 0;
+  
   duration = millis() + (duration * 10000);
   
   //Create LUT 
@@ -15,7 +18,9 @@ void PWM_Test (unsigned long duration, int pause)
               LUT[20 + k] = color(0  ,7-k,3  );  // R: 0     ;  G: 7-->0 ; B: 3
               LUT[28 + k] = color(k  ,0  ,3  );  // R: 0-->7 ;  G: 0     ; B: 3
     if (k<4) {LUT[36 + k] = color(7  ,0  ,3-k);} // R: 7     ;  G: 0     ; B: 3-->0
-  } 
+  }
+  
+  byte currColor = color(4, 3, 0);
   
  // LUT[0] = 0;
   //LUT[1] = 0;
@@ -24,16 +29,19 @@ void PWM_Test (unsigned long duration, int pause)
     
     if (counter == 40) {
       counter = 0;
+      colorCount++;
+      
+      if (colorCount >= sizeof(COLORS)) {
+        colorCount = 0;
+      }
+      
+      //currColor = COLORS[colorCount];
     }
   
     //Frame erstellen
     for (byte col = 0; col < 8; col++) {
       for (byte row = 0; row < 6; row++) {
-        if (counter + col < 40) {
-          Frame[row][col] = LUT[counter + col];
-        } else {
-          Frame[row][col] = LUT[counter + col - 40];
-        }
+          Frame[row][col] = currColor;
       } 
     }
         

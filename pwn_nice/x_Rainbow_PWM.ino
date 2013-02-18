@@ -18,8 +18,8 @@ void Rainbow_PWM (unsigned long duration, int pause)
     if (k<4) {LUT[36 + k] = color(7  ,0  ,3-k);} // R: 7     ;  G: 0     ; B: 3-->0
   } 
   
- // LUT[0] = 0;
-  //LUT[1] = 0;
+  LUT[0] = RED;
+  LUT[1] = BLUE;
     
   do {
     
