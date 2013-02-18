@@ -20,7 +20,7 @@ void PWM_Test (unsigned long duration, int pause)
     if (k<4) {LUT[36 + k] = color(7  ,0  ,3-k);} // R: 7     ;  G: 0     ; B: 3-->0
   }
   
-  byte currColor = color(7, 7, 0);
+  byte currColor = BLUE;
   
  // LUT[0] = 0;
   //LUT[1] = 0;

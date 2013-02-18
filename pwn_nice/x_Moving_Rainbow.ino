@@ -14,17 +14,17 @@ void Moving_Rainbow (unsigned long duration, int pause)
       //Calculate new image (Columns exchanged cyclically 1<--2 2<--3 3<--4 ... 11<--12 12<--1)          
       //red
         temp = buffer_r[0];
-        for (byte i=0; i<7; i++){buffer_r[i] = buffer_r[i+1];}
+      //  for (byte i=0; i<7; i++){buffer_r[i] = buffer_r[i+1];}
        buffer_r[7] = temp;
  
        //green
       temp = buffer_g[0];
-       for (byte i=0; i<7; i++){buffer_g[i] = buffer_g[i+1];}
+       //for (byte i=0; i<7; i++){buffer_g[i] = buffer_g[i+1];}
       buffer_g[7] = temp;
         
       //blue
       temp = buffer_b[0];
-      for (byte i=0; i<7; i++){buffer_b[i] = buffer_b[i+1];}
+      //for (byte i=0; i<7; i++){buffer_b[i] = buffer_b[i+1];}
      buffer_b[7] = temp;            
       
       end_time = millis() + ((unsigned long) pause);

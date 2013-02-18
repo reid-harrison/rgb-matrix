@@ -2,7 +2,7 @@
 void Rainbow_PWM (unsigned long duration, int pause)
 {
   byte LUT[40];
-  byte Frame[6][8];
+  byte Frame[NUM_ROWS][NUM_COLS];
   byte counter = 0;
   unsigned long end_time  = 0;
   
@@ -28,8 +28,8 @@ void Rainbow_PWM (unsigned long duration, int pause)
     }
   
     //Frame erstellen
-    for (byte col = 0; col < 8; col++) {
-      for (byte row = 0; row < 6; row++) {
+    for (byte col = 0; col < NUM_COLS; col++) {
+      for (byte row = 0; row < NUM_ROWS; row++) {
         if (counter + col < 40) {
           Frame[row][col] = LUT[counter + col];
         } else {

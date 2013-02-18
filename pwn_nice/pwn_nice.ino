@@ -4,7 +4,8 @@
 #define PIN_MISO    12 // SPI data input
 #define PIN_MOSI    11 // SPI data output
 
-
+#define NUM_ROWS  6
+#define NUM_COLS  8
 
 //Forward definitions for ADC rate setting
 #define FASTADC 1
@@ -82,22 +83,22 @@ void setup()
   
 }
 
-int choice = 0;
+int choice = 1;
 
 void loop()
 {
   switch (choice) {
     
     case -1:
-      PWM_Test(300, 1);
+      PWM_Test(300, 10);
       break;
     
     case 0:
-      Plasma_PWM(5000, 500);
+      Plasma_PWM(5000, 50);
       break;
       
     case 1:
-      Rainbow_PWM(3000, 1000);
+      Rainbow_PWM(3000, 50);
       break;
       
     case 2:
@@ -107,6 +108,11 @@ void loop()
     case 3:
       Laola(counter_1, direction_1, 5,90);
       break;
+    
+    case 4:
+      Moving_Rainbow(10,50);
+      break;
+      
   }
     //Rainbow_PWM(300, 200);
     //PWM_Test(300, 1);

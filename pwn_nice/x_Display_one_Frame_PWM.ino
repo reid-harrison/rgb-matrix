@@ -1,5 +1,5 @@
 #define RED  color(7, 0, 0)
-#define BLUE  color(0, 0, 7)
+#define BLUE  color(0, 0, 3)
 #define GREEN  color(0, 7, 0)
 
 #define PURPLE  color(7, 0, 7)
@@ -9,7 +9,7 @@
 const byte COLORS[] = { RED, BLUE, GREEN, PURPLE, CYAN, YELLOW };
 
 //Procedure for an image (frame )in mixed colors (PWM)
-void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {  
+void Display_one_Frame_PWM(byte frame[NUM_ROWS][NUM_COLS], unsigned long end_time) {  
   byte SR[] = {0,0,0}; // Buffer for the 5 shift registers
 
   byte back =  0; // Return values ​​of the SPI
@@ -23,9 +23,9 @@ void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {
   do {      
     //Frame display       
     for (byte j = 0; j < 20; j++) {             
-      for (byte row = 0; row < 6; row++) {          
+      for (byte row = 0; row < NUM_ROWS; row++) {          
         //The RGB line 3 x 12 = 36 bits is divided into the 5 8-bit shift registers buffer (5x8 = 40 bits). The remaining 4 bits in the 5th SR buffers are filled with zeros.
-        for (byte col = 0; col < 8; col++) {
+        for (byte col = 0; col < NUM_COLS; col++) {
           bitWrite(SR[0], col, bitRead(LUT_rg[j], (byte)((frame[row][col] >> 5))));
           
           bitWrite(SR[1], col, bitRead(LUT_rg[j], (byte)(((byte)(frame[row][col] << 3)) >> 5) ));
@@ -39,7 +39,7 @@ void Display_one_Frame_PWM(byte frame[6][8], unsigned long end_time) {
           //describe shift registers   
         EnableSPI();       
         digitalWrite(latchPin, LOW);                           // LatchPin to ground, so LEDs are not blinking when "pushing through"
-        back = SendRecSPI(ground);                                // Byte for SR6 slide out
+        back = SendRecSPI(ground);                                // Byte for SR4 slide out
         
         for (byte l = 3; l > 0; l--) {
           back = SendRecSPI(SR[l-1]);

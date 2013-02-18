@@ -6,7 +6,7 @@ void Display_one_Frame (byte buffer_r[], byte buffer_g[], byte buffer_b[], unsig
    byte back = 0; // Return value of the SPI
     
    do{                   
-        for (byte column=0; column < 6; column++) // For all 6 rows
+        for (byte column=0; column < NUM_ROWS; column++) // For all 6 rows
         {
           //The RGB line 3 x 12 = 36 bits is divided into the 5 8-bit shift registers buffer (5x8 = 40 bits). The remaining 4 bits in the 5th SR buffers are filled with zeros.
           for (byte k=0; k<8 ; k++) {bitWrite(SR[0], k   , buffer_r[k  ] & (1 << column));} //SR1 contains 8x red        

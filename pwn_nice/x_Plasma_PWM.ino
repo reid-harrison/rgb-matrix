@@ -2,8 +2,8 @@
 void Plasma_PWM (unsigned long duration, int pause)
 {
 
-  byte  Frame[6][8];
-  int  Plasma[48];
+  byte  Frame[NUM_ROWS][NUM_COLS];
+  int  Plasma[NUM_ROWS*NUM_COLS];
   
   unsigned long end_time  = 0; 
   duration = millis() + (duration * 1000);
@@ -30,14 +30,14 @@ void Plasma_PWM (unsigned long duration, int pause)
   //Plasma geometry calculated once
   byte choise = random(2);
   
-  for(byte x = 0; x < 8;  x++)
+  for(byte x = 0; x < NUM_COLS;  x++)
   {
-    for(byte y = 0; y < 6; y++)
+    for(byte y = 0; y < NUM_ROWS; y++)
     {
       if(choise == 0) {pixel_color = (int) ((20+20*(sin(((float)x)/pixel_size_x)) + 20+20*(sin(((float)y)/pixel_size_y))) / 2);}
       if(choise == 1) {pixel_color = (int) ((20+20*(sin(((float)x)/pixel_size_x)) + 20+20*(sin(((float)y)/pixel_size_y))) / 2 + 20 + 20*sin(((float)x + (float)y)/ pixel_size_y));}
       
-      Plasma[y*8+x] = pixel_color;        
+      Plasma[y*NUM_COLS+x] = pixel_color;        
     }
   }
  
@@ -49,11 +49,11 @@ void Plasma_PWM (unsigned long duration, int pause)
     //Calculate frame
     paletteShift = (int) (millis() / 30);
 
-    for (byte col = 0; col < 8; col++)
+    for (byte col = 0; col < NUM_COLS; col++)
     {
-      for (byte row = 0; row < 6; row++)
+      for (byte row = 0; row < NUM_ROWS; row++)
       {
-        Frame[row][col] = LUT[(Plasma[row*8+col] + paletteShift) % 40];
+        Frame[row][col] = LUT[(Plasma[row*NUM_COLS+col] + paletteShift) % 40];
       }
     }   
     
