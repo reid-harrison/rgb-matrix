@@ -34,3 +34,4 @@ void Moving_Rainbow (unsigned long duration, int pause)
       
     } while (millis() <= duration);
 }
+

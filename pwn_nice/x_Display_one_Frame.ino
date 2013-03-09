@@ -32,5 +32,6 @@ void Display_one_Frame (byte buffer_r[], byte buffer_g[], byte buffer_b[], unsig
           delayMicroseconds(300); // wait         
         }
         
-      } while (millis() <= end_time); // So lange den aktuellen Frame wiederholen bis FrameTime vorüber ist      
+      } while (millis() <= end_time); // So lange den aktuellen Frame wiederholen bis FrameTime vorÃ¼ber ist      
 }
+

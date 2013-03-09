@@ -1,4 +1,4 @@
-//Define the output pins on the μ-controller
+//Define the output pins on the Î¼-controller
 #define latchPin    10 // Enable shift register after data refresh
 #define PIN_SCK     13 // SPI clock
 #define PIN_MISO    12 // SPI data input
@@ -41,7 +41,7 @@ byte buffer_b[] = {0,0,0,0,0,0,0,0}; //Buffer for the blue LEDs (8 bytes corresp
 
 
 
-//Setup procedure prepares the μ-Controller prior to termination - The output pins are defined as digital OUTPUTS
+//Setup procedure prepares the Î¼-Controller prior to termination - The output pins are defined as digital OUTPUTS
 void setup()   
 {               
   //Pins to input and output set and assigned a start value
@@ -83,14 +83,23 @@ void setup()
   
 }
 
-int choice = 1;
+
+
+
+
+
+
+
+
+
+int choice = 6;
 
 void loop()
 {
   switch (choice) {
     
     case -1:
-      PWM_Test(300, 10);
+      Test_Run();
       break;
     
     case 0:
@@ -113,7 +122,17 @@ void loop()
       Moving_Rainbow(10,50);
       break;
       
+     case 5:
+       Display_String(100);
+       break;
+       
+      case 6:
+        Tetris_Test(1000);
+        break;
+      
   }
+  
+
     //Rainbow_PWM(300, 200);
     //PWM_Test(300, 1);
     //Random_PWM(50,100); 
@@ -125,3 +144,4 @@ void loop()
     //Jumping_RGB_Balls(50, 500);
     //Laola(counter_1, direction_1, 5,90);
 }
+

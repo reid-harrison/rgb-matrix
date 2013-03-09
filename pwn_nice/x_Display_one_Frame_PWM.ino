@@ -12,7 +12,7 @@ const byte COLORS[] = { RED, BLUE, GREEN, PURPLE, CYAN, YELLOW };
 void Display_one_Frame_PWM(byte frame[NUM_ROWS][NUM_COLS], unsigned long end_time) {  
   byte SR[] = {0,0,0}; // Buffer for the 5 shift registers
 
-  byte back =  0; // Return values ​​of the SPI
+  byte back =  0; // Return values â€‹â€‹of the SPI
   byte index = 0; // LED-index
 
   const byte LUT_rg[] = {
@@ -88,4 +88,5 @@ byte SendRecSPI(byte Dbyte)
 byte color(byte r, byte g, byte b){
   return 32*r+4*g+b;
 }
+
 
